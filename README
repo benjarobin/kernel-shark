@@ -27,28 +27,10 @@ KernelShark has the following external dependencies:
     sudo dnf install flex bison -y
     sudo dnf install gnu-free-sans-fonts -y
     sudo dnf install qt6-qtbase-devel qt6-qtscxml-devel -y
+    sudo apt-get install libtraceevent-dev libtracefs-dev libtracecmd-dev trace-cmd -y
 
 2.1 If you want to be able to generate Doxygen documentation:
     sudo dnf install graphviz doxygen -y
-
-
-3. In order to install the final dependencies do the following:
-    git clone https://git.kernel.org/pub/scm/libs/libtrace/libtraceevent.git/
-    cd libtraceevent
-    make
-    sudo make install
-
-    git clone https://git.kernel.org/pub/scm/libs/libtrace/libtracefs.git/
-    cd libtracefs
-    make
-    sudo make install
-
-    git clone https://git.kernel.org/pub/scm/utils/trace-cmd/trace-cmd.git/
-    cd trace-cmd
-    make
-    make libs
-    sudo make install
-    sudo make install_libs
 
 Building:
 ------------------------------------------------------------
