@@ -675,23 +675,25 @@ struct kshark_config_doc *
 kshark_export_plugin_file(struct kshark_plugin_list *plugin,
 			  enum kshark_config_formats format)
 {
-	/*  Create a new Configuration document. */
-	struct kshark_config_doc *conf =
-		kshark_config_new("kshark.config.library", format);
-
-	if (!conf)
-		return NULL;
+	struct kshark_config_doc *conf;
 
 	switch (format) {
 	case KS_CONFIG_JSON:
-		kshark_plugin_to_json(plugin, conf->conf_doc);
-		return conf;
+		break;
 
 	default:
 		fprintf(stderr, "Document format %d not supported\n",
-			conf->format);
+			format);
 		return NULL;
 	}
+
+	/*  Create a new Configuration document. */
+	conf = kshark_config_new("kshark.config.library", format);
+	if (!conf)
+		return NULL;
+
+	kshark_plugin_to_json(plugin, conf->conf_doc);
+	return conf;
 }
 
 static bool kshark_all_plugins_to_json(struct kshark_context *kshark_ctx,
@@ -739,22 +741,24 @@ struct kshark_config_doc *
 kshark_export_all_plugins(struct kshark_context *kshark_ctx,
 			  enum kshark_config_formats format)
 {
-	struct kshark_config_doc *conf =
-		kshark_config_new("kshark.config.plugins", KS_CONFIG_JSON);
-
-	if (!conf)
-		return NULL;
+	struct kshark_config_doc *conf;
 
 	switch (format) {
 	case KS_CONFIG_JSON:
-		kshark_all_plugins_to_json(kshark_ctx, conf->conf_doc);
-		return conf;
+		break;
 
 	default:
 		fprintf(stderr, "Document format %d not supported\n",
-			conf->format);
+			format);
 		return NULL;
 	}
+
+	conf = kshark_config_new("kshark.config.plugins", format);
+	if (!conf)
+		return NULL;
+
+	kshark_all_plugins_to_json(kshark_ctx, conf->conf_doc);
+	return conf;
 }
 
 static bool kshark_plugin_from_json(struct kshark_context *kshark_ctx,
@@ -867,22 +871,24 @@ struct kshark_config_doc *
 kshark_export_stream_plugins(struct kshark_data_stream *stream,
 			     enum kshark_config_formats format)
 {
-	struct kshark_config_doc *conf =
-		kshark_config_new("kshark.config.plugins", KS_CONFIG_JSON);
-
-	if (!conf)
-		return NULL;
+	struct kshark_config_doc *conf;
 
 	switch (format) {
 	case KS_CONFIG_JSON:
-		kshark_stream_plugins_to_json(stream, conf->conf_doc);
-		return conf;
+		break;
 
 	default:
 		fprintf(stderr, "Document format %d not supported\n",
-			conf->format);
+			format);
 		return NULL;
 	}
+
+	conf = kshark_config_new("kshark.config.plugins", KS_CONFIG_JSON);
+	if (!conf)
+		return NULL;
+
+	kshark_stream_plugins_to_json(stream, conf->conf_doc);
+	return conf;
 }
 
 static bool kshark_stream_plugins_from_json(struct kshark_context *kshark_ctx,
@@ -1019,23 +1025,25 @@ struct kshark_config_doc *
 kshark_export_model(struct kshark_trace_histo *histo,
 		    enum kshark_config_formats format)
 {
-	/*  Create a new Configuration document. */
-	struct kshark_config_doc *conf =
-		kshark_config_new("kshark.config.model", format);
-
-	if (!conf)
-		return NULL;
+	struct kshark_config_doc *conf;
 
 	switch (format) {
 	case KS_CONFIG_JSON:
-		kshark_model_to_json(histo, conf->conf_doc);
-		return conf;
+		break;
 
 	default:
 		fprintf(stderr, "Document format %d not supported\n",
 			format);
 		return NULL;
 	}
+
+	/*  Create a new Configuration document. */
+	conf = kshark_config_new("kshark.config.model", format);
+	if (!conf)
+		return NULL;
+
+	kshark_model_to_json(histo, conf->conf_doc);
+	return conf;
 }
 
 static bool kshark_model_from_json(struct kshark_trace_histo *histo,
