@@ -318,13 +318,15 @@ ksplot_point Shape::center() const
 {
 	ksplot_point c = {0, 0};
 
-	for (size_t i = 0; i < _nPoints; ++i) {
-		c.x += _points[i].x;
-		c.y += _points[i].y;
-	}
+	if (_nPoints > 0) {
+		for (size_t i = 0; i < _nPoints; ++i) {
+			c.x += _points[i].x;
+			c.y += _points[i].y;
+		}
 
-	c.x /= _nPoints;
-	c.y /= _nPoints;
+		c.x /= _nPoints;
+		c.y /= _nPoints;
+	}
 
 	return c;
 }
