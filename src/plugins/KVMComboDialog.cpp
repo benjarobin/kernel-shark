@@ -342,7 +342,6 @@ void KsComboPlotDialog::_guestStreamChanged(int)
 		return;
 
 	int newGuestId = _guestStreamComboBox.currentData().toInt();
-	QVector<int> vcpuCBs(_guestMapCount, 0);
 
 	_plotMap[_currentGuestStream] = _streamCombos(_currentGuestStream);
 
