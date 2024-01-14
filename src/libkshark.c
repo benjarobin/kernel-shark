@@ -1371,9 +1371,10 @@ void kshark_clear_all_filters(struct kshark_context *kshark_ctx,
 {
 	struct kshark_data_stream *stream;
 	int *stream_ids, i;
+	size_t j;
 
-	for (i = 0; i < n_entries; ++i)
-		set_all_visible(&data[i]->visible);
+	for (j = 0; j < n_entries; ++j)
+		set_all_visible(&data[j]->visible);
 
 	stream_ids = kshark_all_streams(kshark_ctx);
 	for (i = 0; i < kshark_ctx->n_streams; i++) {
@@ -1942,7 +1943,7 @@ kshark_merge_data_entries(struct kshark_entry_data_set *buffers, int n_buffers)
 		return NULL;
 	}
 
-	for (i = 0; i < n_buffers; ++i) {
+	for (i = 0; i < (size_t)n_buffers; ++i) {
 		count[i] = 0;
 		if (buffers[i].n_rows > 0)
 			tot += buffers[i].n_rows;
@@ -2111,7 +2112,7 @@ kshark_merge_data_matrices(struct kshark_matrix_data_set *buffers, int n_buffers
 {
 	struct kshark_matrix_data_set merged_data;
 	size_t i, tot = 0, count[n_buffers];
-	int i_first;
+	int i_first, j;
 	bool status;
 
 	merged_data.n_rows = -1;
@@ -2121,10 +2122,10 @@ kshark_merge_data_matrices(struct kshark_matrix_data_set *buffers, int n_buffers
 		goto end;
 	}
 
-	for (i = 0; i < n_buffers; ++i) {
-		count[i] = 0;
-		if (buffers[i].n_rows > 0)
-			tot += buffers[i].n_rows;
+	for (j = 0; j < n_buffers; ++j) {
+		count[j] = 0;
+		if (buffers[j].n_rows > 0)
+			tot += buffers[j].n_rows;
 	}
 
 	status = kshark_data_matrix_alloc(tot, &merged_data.event_array,

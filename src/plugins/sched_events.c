@@ -115,7 +115,7 @@ static void plugin_sched_swith_action(struct kshark_data_stream *stream,
 	ret = tep_read_number_field(plugin_ctx->sched_switch_next_field,
 				    record->data, &next_pid);
 
-	if (ret == 0 && next_pid >= 0) {
+	if (ret == 0) {
 		plugin_sched_set_pid(&ks_field, entry->pid);
 
 		ret = tep_read_number_field(plugin_ctx->sched_switch_prev_state_field,

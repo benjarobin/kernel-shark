@@ -23,6 +23,7 @@ int main(int argc, char **argv)
 	struct kshark_entry **data = NULL;
 	int *pids, *evt_ids;
 	char *entry_str;
+	int rt;
 
 	/* Create a new kshark session. */
 	kshark_ctx = NULL;
@@ -31,14 +32,16 @@ int main(int argc, char **argv)
 
 	/* Open a trace data file produced by trace-cmd. */
 	if (argc > 1)
-		sd = kshark_open(kshark_ctx, argv[1]);
+		rt = kshark_open(kshark_ctx, argv[1]);
 	else
-		sd = kshark_open(kshark_ctx, default_file);
+		rt = kshark_open(kshark_ctx, default_file);
 
-	if (sd < 0) {
+	if (rt < 0) {
 		kshark_free(kshark_ctx);
 		return 1;
 	}
+
+	sd = (size_t)rt;
 
 	/* Load the content of the file into an array of entries. */
 	n_rows = kshark_load_entries(kshark_ctx, sd, &data);

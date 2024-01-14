@@ -169,7 +169,7 @@ void kshark_hash_id_clear(struct kshark_hash_id *hash)
 {
 	struct kshark_hash_id_item *item, *next;
 	size_t size;
-	int i;
+	size_t i;
 
 	if (!hash || ! hash->hash)
 		return;
@@ -212,7 +212,8 @@ int *kshark_hash_ids(struct kshark_hash_id *hash)
 {
 	struct kshark_hash_id_item *item;
 	size_t size = hash_size(hash);
-	int count = 0, i;
+	size_t i;
+	int count = 0;
 	int *ids;
 
 	if (!hash->count)

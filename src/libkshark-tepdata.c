@@ -239,7 +239,7 @@ static int get_next_pid(struct kshark_data_stream *stream,
 	ret = tep_read_number_field(get_sched_next(stream),
 				    record->data, &val);
 
-	return ret ? : val;
+	return ret ? : (int)val;
 }
 
 static void register_command(struct kshark_data_stream *stream,

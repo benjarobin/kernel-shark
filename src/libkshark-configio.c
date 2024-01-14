@@ -1117,7 +1117,8 @@ static bool kshark_event_filter_to_json(struct kshark_data_stream *stream,
 	json_object *jfilter_data, *jname;
 	struct kshark_hash_id *filter;
 	char *name_str;
-	int i, *ids;
+	int *ids;
+	size_t i;
 
 	filter = kshark_get_filter(stream, filter_type);
 	if (!filter)
@@ -1286,7 +1287,8 @@ static bool kshark_filter_array_to_json(struct kshark_hash_id *filter,
 					struct json_object *jobj)
 {
 	json_object *jfilter_data, *jpid = NULL;
-	int i, *ids;
+	int *ids;
+	size_t i;
 
 	/*
 	 * If this Json document already contains a description of the filter,

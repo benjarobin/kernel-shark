@@ -518,13 +518,15 @@ static int
 map_collection_front_request(const struct kshark_entry_collection *col,
 			     struct kshark_entry_request *req)
 {
-	size_t req_first, req_end;
-	ssize_t col_index;
+	size_t req_first, req_end, col_index;
+	ssize_t r;
 	int req_count;
 
-	col_index = map_collection_request_init(col, req, true, &req_end);
-	if (col_index == KS_EMPTY_BIN)
+	r = map_collection_request_init(col, req, true, &req_end);
+	if (r == KS_EMPTY_BIN)
 		return 0;
+
+	col_index = (size_t)r;
 
 	/*
 	 * Now loop over the intervals of the collection going forwards till
@@ -746,7 +748,7 @@ kshark_find_data_collection(struct kshark_entry_collection *col,
 	while (col) {
 		if (col->cond == cond &&
 		    col->stream_id == sd &&
-		    col->n_val == n_val &&
+		    (size_t)col->n_val == n_val &&
 		    val_compare(col->values, values, n_val))
 				return col;
 
@@ -899,7 +901,7 @@ void kshark_unregister_data_collection(struct kshark_entry_collection **col,
 	for (list = *col; list; list = list->next) {
 		if (list->cond == cond &&
 		    list->stream_id == sd &&
-		    list->n_val == n_val &&
+		    (size_t)list->n_val == n_val &&
 		    val_compare(list->values, values, n_val)) {
 			*last = list->next;
 			kshark_free_data_collection(list);
