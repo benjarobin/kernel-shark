@@ -1,0 +1,15 @@
+
+# Ignore everything in bin directory except kshark-su-record
+/bin/*
+!/bin/kshark-su-record
+
+# Ignore generated files
+CMakeLists.txt.user
+/libkshark.pc
+/org.freedesktop.kshark-record.policy
+/kernelshark.desktop
+/src/KsCmakeDef.hpp
+/lib/*
+/tests/*.so
+/tests/kshark-tests
+/tests/kshark-gui-tests
